@@ -236,6 +236,119 @@
                 transform-style: flat;
             }
         }
+        
+        /* RESPONSIVE BUSINESS CARD STYLES - ADDED ONLY THESE */
+        @media (max-width: 1024px) {
+            .business-card-container {
+                padding: 1.5rem !important;
+            }
+            
+            .business-card-content {
+                gap: 2rem !important;
+            }
+            
+            .qr-code-wrapper {
+                width: 100% !important;
+                max-width: 280px !important;
+                margin: 0 auto !important;
+            }
+            
+            .qr-code-image {
+                width: 200px !important;
+                height: 200px !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .business-card-container {
+                padding: 1.25rem !important;
+            }
+            
+            .business-card-title {
+                font-size: 1.5rem !important;
+            }
+            
+            .business-card-subtitle {
+                font-size: 0.9rem !important;
+            }
+            
+            .qr-code-wrapper {
+                max-width: 250px !important;
+            }
+            
+            .qr-code-image {
+                width: 180px !important;
+                height: 180px !important;
+            }
+            
+            .business-card-buttons {
+                flex-direction: column !important;
+                width: 100% !important;
+                max-width: 250px !important;
+                margin: 0 auto !important;
+            }
+            
+            .business-card-buttons button {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+            
+            .contact-info-section {
+                width: 100% !important;
+                text-align: center !important;
+            }
+            
+            .contact-item {
+                text-align: left !important;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .business-card-container {
+                padding: 1rem !important;
+            }
+            
+            .business-card-title {
+                font-size: 1.25rem !important;
+            }
+            
+            .qr-code-wrapper {
+                max-width: 220px !important;
+            }
+            
+            .qr-code-image {
+                width: 160px !important;
+                height: 160px !important;
+            }
+            
+            .contact-item {
+                padding: 0.75rem !important;
+            }
+            
+            .contact-item h4 {
+                font-size: 0.95rem !important;
+            }
+            
+            .contact-item p {
+                font-size: 0.85rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .qr-code-image {
+                width: 140px !important;
+                height: 140px !important;
+            }
+            
+            .business-card-buttons button {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.875rem !important;
+            }
+            
+            .business-card-content {
+                gap: 1.5rem !important;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -312,7 +425,7 @@
                 <!-- Left Column - Text Content -->
                 <div class="space-y-8">
                     <div class="overflow-hidden">
-                        <h1 class="text-4xl md:text-5xl font-bold mb-4 animate-slide-up">
+                        <h1 class="text-3xl md:text-4xl font-bold mb-4 animate-slide-up">
                             IGIRANEZA <span class="gold-gradient">Jean Remy</span>
                         </h1>
                     </div>
@@ -668,7 +781,153 @@
                         </div>
                     </div>
                 </div>
-
+                
+                <!-- Digital Business Card - RESPONSIVE -->
+                <div class="glass-effect rounded-2xl p-8 shadow-2xl business-card-container">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-2 business-card-title">Digital Business Card</h3>
+                        <p class="text-white-400 business-card-subtitle">Scan QR to save contact instantly</p>
+                    </div>
+                    
+                    <div class="flex flex-col lg:flex-row items-center gap-8 business-card-content">
+                        <!-- QR Code Section -->
+                        <div class="flex-1 text-center qr-code-wrapper">
+                            <div class="relative inline-block">
+                                <div class="absolute -inset-4 bg-gradient-to-r from-gold-500/20 to-transparent rounded-2xl blur-xl"></div>
+                                <div class="relative bg-white p-6 rounded-2xl shadow-lg">
+                                    <!-- QR Code with logo in center -->
+                                    <div class="relative">
+                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=BEGIN:VCARD%0AVERSION:3.0%0AN:Remy;Jean;;;%0ATEL:+250780958748%0AEMAIL:igiranezajeanremy%40gmail.com%0AURL:https://4realtechnologies.vercel.app/%0ANOTE:Industrial%20IT%0AEND:VCARD&format=svg&color=1a1a1a&bgcolor=ffffff&qzone=2" 
+                                             alt="QR Code" 
+                                             class="w-56 h-56 rounded-lg border-4 border-white qr-code-image">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- QR Code Actions -->
+                            <div class="flex justify-center gap-4 mt-6 business-card-buttons">
+                                <button onclick="downloadQR()" 
+                                        class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                    </svg>
+                                    Save QR
+                                </button>
+                                <button onclick="shareContact()" 
+                                        class="px-4 py-2 bg-gold-600 hover:bg-gold-700 text-white rounded-lg transition-colors flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+                                    </svg>
+                                    Share
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Enhanced Contact Details -->
+                        <div class="flex-1 space-y-6 contact-info-section">
+                            <!-- Profile Header -->
+                            <div class="flex items-center gap-4 mb-6">
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">IGIRANEZA Jean Remy</h3>
+                                    <p class="text-gold-400">Industrial IT</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Contact Items with Copy Functionality -->
+                            <div class="space-y-4">
+                                <!-- Phone -->
+                                <div class="group relative p-4 rounded-xl hover:bg-white/5 transition-all duration-300 border border-white/5 hover:border-gold-500/20 contact-item">
+                                    <div class="flex items-center gap-4">
+                                        <div class="p-3 bg-green-500/10 rounded-lg group-hover:scale-110 transition-transform">
+                                            <span class="text-green-500 text-xl">📱</span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-white font-semibold">Phone</h4>
+                                            <p id="phoneNumber" class="text-white-400 font-mono">+250780958748</p>
+                                        </div>
+                                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <button onclick="copyToClipboard('+250780958748')" 
+                                                    class="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                                                    title="Copy number">
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                                </svg>
+                                            </button>
+                                            <a href="tel:+250780958748" 
+                                               class="p-2 bg-green-600 hover:bg-green-700 rounded-lg transition-colors"
+                                               title="Call">
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                                </svg>
+                                            </a>
+                                            <a href="https://wa.me/250780958748" 
+                                               target="_blank"
+                                               class="p-2 bg-[#25D366] hover:bg-[#128C7E] rounded-lg transition-colors"
+                                               title="WhatsApp">
+                                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c2.43 0 4.68.94 6.4 2.66a8.944 8.944 0 012.66 6.4c0 4.96-4.04 8.99-8.99 8.99-1.6 0-3.15-.42-4.49-1.21l-.3-.18-3.12.82.83-3.04-.2-.32a8.956 8.956 0 01-1.38-4.66c0-4.96 4.03-8.99 8.99-8.99zM9.47 7.33c-.24 0-.43.04-.63.13-.2.1-.47.31-.58.51-.13.2-.25.59-.25.59s-.2.67-.23.82c-.04.15-.07.3.09.49.16.19.72.86 1.56 1.38 1.1.69 1.62.86 1.91.86.2 0 .33-.02.43-.04.1-.02.31-.13.42-.25.11-.11.25-.33.31-.5.06-.16.12-.36.09-.5-.03-.14-.17-.24-.36-.4-.2-.15-.47-.34-.56-.38-.09-.04-.2-.08-.28.06-.09.14-.34.38-.42.47-.07.09-.15.1-.27.04-.13-.07-.53-.2-1-.62-.37-.32-.62-.71-.69-.83-.07-.12-.01-.18.05-.24.06-.06.13-.15.2-.22.07-.07.09-.12.13-.20.04-.08.02-.15-.01-.20-.04-.06-.36-.89-.5-1.21-.14-.33-.28-.28-.36-.28-.09 0-.19-.01-.28-.01z"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Email -->
+                                <div class="group relative p-4 rounded-xl hover:bg-white/5 transition-all duration-300 border border-white/5 hover:border-gold-500/20 contact-item">
+                                    <div class="flex items-center gap-4">
+                                        <div class="p-3 bg-blue-500/10 rounded-lg group-hover:scale-110 transition-transform">
+                                            <span class="text-blue-500 text-xl">✉️</span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-white font-semibold">Email</h4>
+                                            <p id="emailAddress" class="text-white-400">igiranezajeanremy@gmail.com</p>
+                                        </div>
+                                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <button onclick="copyToClipboard('igiranezajeanremy@gmail.com')" 
+                                                    class="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                                                    title="Copy email">
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                                </svg>
+                                            </button>
+                                            <a href="mailto:remyjean646@gmail.com" 
+                                               class="p-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+                                               title="Send email">
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- VCard Download -->
+                                <div class="group relative p-4 rounded-xl hover:bg-white/5 transition-all duration-300 border border-white/5 hover:border-gold-500/20 bg-gradient-to-r from-gold-500/5 to-transparent contact-item">
+                                    <div class="flex items-center gap-4">
+                                        <div class="p-3 bg-purple-500/10 rounded-lg group-hover:scale-110 transition-transform">
+                                            <span class="text-purple-500 text-xl">📇</span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-white font-semibold">Save Contact</h4>
+                                            <p class="text-white-400 text-sm">Download vCard to phone contacts</p>
+                                        </div>
+                                        <a href="data:text/vcard;charset=utf-8,BEGIN:VCARD%0AVERSION:3.0%0AN:Remy;Jean;;;%0ATEL:+250780958748%0AEMAIL:igiranezajeanremy%40gmail.com%0AURL:https://yourportfolio.com%0ANOTE:Industrial%20IT%0AEND:VCARD" 
+                                           download="Jean_Remy.vcf"
+                                           onclick="trackDownload()"
+                                           class="px-4 py-2 bg-gradient-to-r from-gold-600 to-gold-700 hover:from-gold-700 hover:to-gold-800 text-white rounded-lg font-semibold transition-all duration-300 flex items-center gap-2">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                            </svg>
+                                            vCard
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </section>
@@ -885,6 +1144,100 @@
                 }
             });
         });
+
+        function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        showNotification('Copied to clipboard!', 'success');
+    }).catch(err => {
+        showNotification('Failed to copy', 'error');
+    });
+}
+
+function downloadQR() {
+    const link = document.createElement('a');
+    link.href = 'https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=BEGIN:VCARD%0AVERSION:3.0%0AN:Remy;Jean;;;%0ATEL:+250780958748%0AEMAIL:igiranezajeanremy%40gmail.com%0AURL:https://4realtechnologies.vercel.app/%0ANOTE:Web%20Developer%20%26%20Designer%0AEND:VCARD';
+    link.download = 'Remy_Jean_QR.png';
+    link.click();
+    showNotification('QR code downloaded!', 'success');
+}
+
+function shareContact() {
+    const shareData = {
+        title: 'Jean Remy - Contact',
+        text: 'Contact Jean Remy - Industrial IT',
+        url: window.location.href
+    };
+    
+    if (navigator.share) {
+        navigator.share(shareData)
+            .then(() => showNotification('Contact shared successfully!', 'success'))
+            .catch(err => showNotification('Share cancelled', 'info'));
+    } else {
+        copyToClipboard(window.location.href);
+        showNotification('Link copied to clipboard!', 'success');
+    }
+}
+
+function trackDownload() {
+    // You can add analytics here
+    console.log('vCard download initiated');
+    showNotification('vCard download started', 'success');
+}
+
+function showNotification(message, type) {
+    // Remove existing notifications
+    const existing = document.querySelector('.contact-notification');
+    if (existing) existing.remove();
+    
+    const notification = document.createElement('div');
+    notification.className = `contact-notification fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg text-white font-semibold z-50 transform transition-all duration-300 ${
+        type === 'success' ? 'bg-gold-600' : 
+        type === 'error' ? 'bg-red-600' : 'bg-blue-600'
+    }`;
+    notification.textContent = message;
+    notification.style.transform = 'translateX(100%)';
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 10);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// Add notification styles
+const style = document.createElement('style');
+style.textContent = `
+    .contact-notification {
+        animation: slideIn 0.3s ease-out;
+    }
+    
+    @keyframes slideIn {
+        from { transform: translateX(100%); }
+        to { transform: translateX(0); }
+    }
+    
+    .glass-effect {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .text-white-400 {
+        color: rgba(255, 255, 255, 0.6);
+    }
+`;
+document.head.appendChild(style);
     </script>
 </body>
 </html>
