@@ -301,12 +301,12 @@
                         Industrial Information Technician
                     </h2>
                     
-                    <p class="text-lg text-gray-400 mb-8">
+                    <p class="text-lg text-gray-200 mb-8">
                         Bachelor's Degree in Industrial Information Technology (IIT) |
                         Specializing in Embedded Systems, Internet of Things,
                         Industrial Automation, and Cryptography
                     </p>
-                    <p class="text-lg text-gray-400 mb-8">
+                    <p class="text-lg text-gray-200 mb-8">
                         As dedicated engineer with expertise in the above fiels,
                         I'm passionate about creating innovative solutions that bridge hardware and software,
                         delivering secure and efficient systems for industrial applications.
@@ -920,9 +920,10 @@
             mesh.userData.hover = 0;
             mesh.userData.burst = 0;
             mesh.userData.rotSpeed = {
-                x: (Math.random() - 0.5) * 0.008,
-                y: (Math.random() - 0.5) * 0.008
+                x: (Math.random() < 0.5 ? -1 : 1) * 0.04,
+                y: (Math.random() < 0.5 ? -1 : 1) * 0.06
             };
+            mesh.userData.isSpinning = false;
             mesh.material.color.setHex(baseColor);
             mesh.material.opacity = baseOpacity;
             mesh.material.transparent = true;
@@ -995,6 +996,7 @@
         );
         knot.position.set(0, 0, -40);
         prepareInteractiveObject(knot, 0xfacc15, 1);
+        knot.userData.rotSpeed = { x: 0.15, y: 0.2 };
         scene.add(knot);
         floatingObjects.push(knot);
         
@@ -1043,9 +1045,8 @@
             }
 
             if (event.type === 'pointerdown' && hoveredObject) {
+                hoveredObject.userData.isSpinning = !hoveredObject.userData.isSpinning;
                 hoveredObject.userData.burst = 1;
-                hoveredObject.userData.rotSpeed.x += 0.08;
-                hoveredObject.userData.rotSpeed.y += 0.12;
             }
         }
         
@@ -1093,8 +1094,10 @@
 
                 const scaleBoost = 1 + data.hover * 0.18 + data.burst * 0.25;
                 obj.scale.setScalar(data.baseScale * scaleBoost);
-                obj.rotation.x += data.rotSpeed.x || 0.002;
-                obj.rotation.y += data.rotSpeed.y || 0.003;
+                if (data.isSpinning) {
+                    obj.rotation.x += data.rotSpeed.x;
+                    obj.rotation.y += data.rotSpeed.y;
+                }
                 obj.position.y = data.baseY + Math.sin(elapsed * 0.5 + i) * 0.35;
 
                 const highlight = new THREE.Color(0xffffff);
@@ -1107,10 +1110,6 @@
             
             // Rotate particles slowly
             particles.rotation.y = elapsed * 0.015;
-            
-            // Torus knot special rotation
-            knot.rotation.x = elapsed * 0.15;
-            knot.rotation.y = elapsed * 0.2;
             
             // Dynamic lighting
             keyLight.position.x = Math.sin(elapsed * 0.4) * 15;
@@ -1229,14 +1228,8 @@
         
         mobileMenuItems.forEach(item => {
             item.addEventListener('click', (e) => {
-                e.preventDefault();
                 closeMobileMenu();
-                setTimeout(() => {
-                    const target = document.querySelector(item.getAttribute('href'));
-                    if (target) {
-                        window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-                    }
-                }, 100);
+                handleNavigation(e);
             });
         });
         
